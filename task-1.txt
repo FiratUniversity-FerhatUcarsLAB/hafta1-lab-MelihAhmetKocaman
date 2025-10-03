@@ -1,4 +1,57 @@
-Öğrenci No:
-AD-SOYAD:
+Öğrenci No: 250541088
+AD-SOYAD: Melih Ahmet Kocaman
 
 Lütfen seçtiğiniz algoritmaya ait çözümü ve diğer isterleri aşağıya ekleyiniz:
+
+ ALGORİTMA: En kısa sürede üniversiteye gitme algoritması
+
+BAŞLA
+
+    // 1. Başlangıç noktası belirle
+    KONUM ← "Yurt"
+
+    // 2. Mevcut ulaşım seçeneklerini listele
+    ULAŞIM_SEÇENEKLERİ = {yürüyerek, otobüs, metro, bisiklet, scooter}
+
+    // 3. Her ulaşım seçeneği için tahmini süreyi hesapla
+    HER BİR SEÇENEK için
+        TRAFİK_DURUMU = anlık trafik bilgisini öğren
+        BEKLEME_SÜRESİ = toplu taşıma için tahmini bekleme süresi
+        YÜRÜME_MESAFESİ = durağa/otoparka kadar olan süre
+        TOPLAM_SÜRE = YÜRÜME_MESAFESİ + BEKLEME_SÜRESİ + TRAFİK_DURUMU + yolculuk süresi
+        SÜRELER[SEÇENEK] = TOPLAM_SÜRE
+    SON
+
+    // 4. En kısa süreli ulaşım seçeneğini bul
+    EN_HIZLI = minimum(SÜRELER)
+
+    // 5. Yolculuk planı
+    EĞER EN_HIZLI = yürüyerek İSE
+        ADIM = "Doğrudan yürüyerek üniversiteye git"
+    DEĞİLSE EĞER EN_HIZLI = otobüs İSE
+        DURAK = en yakın otobüs durağını bul
+        GİT(DURAK)
+        BEKLE(otobüs gelene kadar)
+        BİN(otobüs)
+        ÜNİVERSİTEYE_GİT()
+    DEĞİLSE EĞER EN_HIZLI = metro İSE
+        İSTASYON = en yakın metro istasyonunu bul
+        GİT(İSTASYON)
+        BEKLE(metro gelene kadar)
+        BİN(metro)
+        ÜNİVERSİTEYE_GİT()
+    DEĞİLSE EĞER EN_HIZLI = bisiklet VEYA scooter İSE
+        ARACI_AL()
+        ÜNİVERSİTEYE_GİT()
+    SON
+
+    // 6. Varış kontrolü
+    EĞER KONUM = "Üniversite" İSE
+        YAZ("Üniversiteye ulaşıldı!")
+    DEĞİLSE
+        // Beklenmeyen durum: Yol kapalı, araç bozuldu vs.
+        YAZ("Alternatif rota araniyor...")
+        TEKRAR BAŞA DÖN
+    SON
+
+BİTİR
